@@ -20,7 +20,9 @@ import { PdfViewerModule, LinkAnnotationService, BookmarkViewService,
         id="pdfViewer"
         [documentPath]="documentPath"
         [resourceUrl]="resourcesUrl"
-        [enableFormDesigner]="false"
+        (addSignature)="signatureAdded($event)"
+        (removeSignature)="signatureRemoved($event)"
+        [toolbarSettings]="{ toolbarItems: toolbarItems }"
         style="height:640px; display:block">
       </ejs-pdfviewer>
     </div>
@@ -28,16 +30,27 @@ import { PdfViewerModule, LinkAnnotationService, BookmarkViewService,
 })
 export class App {
   @ViewChild('pdfViewer') public pdfviewer!: PdfViewerComponent;
-  public documentPath: string =
-    'https://cdn.syncfusion.com/content/pdf/pdf-succinctly.pdf';
-  public resourcesUrl: string =
-    'https://cdn.syncfusion.com/ej2/35.1.39/dist/ej2-pdfviewer-lib';
+  public documentPath: string = window.location.origin + '/assets/form-designer.pdf';
+  public resourcesUrl: string = 'https://cdn.syncfusion.com/ej2/35.1.39/dist/ej2-pdfviewer-lib';
+   public toolbarItems: any[] = [
+    "UndoRedoTool",
+    "PageNavigationTool",
+    "MagnificationTool",
+    "PanTool",
+    "SelectionTool",
+    "CommentTool",
+    "AnnotationEditTool",
+    "SearchOption"
+  ];
   
   public signatureAdded(args: any): void {
     const value = args.id;
-    const result = "signIcon" + value.replace("pdfViewerinput", "");
+    const result = value.replace("_content", "");
     const signLabel = document.getElementById(result);
-    signLabel!.style.display = "none";
+    const child = signLabel?.parentElement?.children[1] as HTMLElement;
+    if (child) {
+      child.style.display = "none";
+    }
   }
   public signatureRemoved(args: any): void {
     this.pdfviewer.formFieldCollections.forEach((field: any) => {
@@ -46,11 +59,11 @@ export class App {
             field.value === null ||
             field.value === undefined;
         const value = field.id;
-        const result = "signIcon" + value.replace("pdfViewerinput", "");
-        const signLabel = document.getElementById(result);
-        if (isEmpty && signLabel!.style.display == 'none') {
-          signLabel!.style.display = 'block';
+        const signLabel = document.getElementById(value);
+        const child = signLabel?.parentElement?.children[1] as HTMLElement;
+        if (isEmpty && child!.style.display == 'none') {
+          child.style.display = "block";
         }
     });
-}
+  }
 }
