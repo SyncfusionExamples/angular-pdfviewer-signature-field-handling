@@ -20,6 +20,7 @@ import { PdfViewerModule, LinkAnnotationService, BookmarkViewService,
         id="pdfViewer"
         [documentPath]="documentPath"
         [resourceUrl]="resourcesUrl"
+        (zoomChange)="zoomChanged($event)"
         (addSignature)="signatureAdded($event)"
         (removeSignature)="signatureRemoved($event)"
         [toolbarSettings]="{ toolbarItems: toolbarItems }"
@@ -64,6 +65,39 @@ export class App {
         if (isEmpty && child!.style.display == 'none') {
           child.style.display = "block";
         }
+    });
+  }
+  public zoomChanged(args: any): void {
+    const observer = new MutationObserver(() => {
+      let allRendered = true;
+
+      this.pdfviewer.formFieldCollections.forEach((field: any) => {
+        const signLabel = document.getElementById(field.id);
+        const child = signLabel?.parentElement?.children[1] as HTMLElement;
+
+        if (!child) {
+          allRendered = false;
+          return;
+        }
+
+        const isEmpty = !field.value;
+
+        if (isEmpty && child && child!.style.display == 'none') {
+          child.style.display = "block";
+        }
+        if (!isEmpty && child) {
+          child.style.display = "none";
+        }
+      });
+
+      if (allRendered) {
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.getElementById('pdfViewer')!, {
+      childList: true,
+      subtree: true
     });
   }
 }
