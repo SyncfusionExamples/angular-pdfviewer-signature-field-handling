@@ -1,59 +1,78 @@
-# PdfviewerApp
+# Syncfusion Angular PDF Viewer Sample
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+This project demonstrates how to integrate and use the **Syncfusion Angular PDF Viewer** (`@syncfusion/ej2-angular-pdfviewer`) component in an Angular standalone application.
 
-## Development server
+## Key Features
 
-To start a local development server, run:
+- **Document Viewing**: View and navigate PDF documents seamlessly using standalone components.
+- **Custom Toolbar**: Pre-configured toolbar items including Page Navigation, Magnification, Pan, Selection, Comment, Annotation Edit, Undo/Redo, and Text Search.
+- **Form Fields & Signatures**: Handles PDF form fields with custom signature events (`addSignature` and `removeSignature`) to toggle signature placeholders and labels dynamically.
 
+---
+
+## Prerequisites
+
+Before running this application, make sure you have installed:
+
+- [Node.js](https://nodejs.org/) (v18.x, v20.x, or later recommended)
+- [npm](https://www.npmjs.com/) (v9.x or higher)
+- [Angular CLI](https://angular.dev/tools/cli) (v19+ / v22+)
+
+---
+
+## Getting Started
+
+### 1. Install Dependencies
+
+Install all required npm packages:
+
+```bash
+npm install
+```
+
+### 2. Run the Development Server
+
+Start the local development server:
+
+```bash
+npm start
+```
+or:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+Once the compilation is complete, open your browser and navigate to:
+```
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application will automatically reload if you make any changes to the source files.
+
+---
+
+## Build
+
+To compile and produce production build artifacts:
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
+The compiled output will be generated inside the `dist/` directory.
 
-To build the project run:
+---
+
+## Running Tests
+
+To run unit tests using Vitest:
 
 ```bash
-ng build
+npm test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Support & Documentation
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Syncfusion Angular PDF Viewer Documentation](https://help.syncfusion.com/document-processing/pdf/pdf-viewer/angular/getting-started)
